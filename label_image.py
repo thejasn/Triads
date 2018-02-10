@@ -1,7 +1,7 @@
 import tensorflow as tf, sys
 
 image_path = sys.argv[1]
-
+my_result={}
 # Read in the image_data
 image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 
@@ -24,7 +24,10 @@ with tf.Session() as sess:
     for node_id in top_k:
         human_string = label_lines[node_id]
         score = predictions[0][node_id]
-        print('%s (score = %.5f)' % (human_string, score))
-
+        #print('%s (score = %.5f)' % (human_string, score))
+        my_result[human_string]=score
+    f = open("results.txt","w")
+    f.write(str(my_result))
+    f.close()
 
         #Keep doing stuff... Meow do stuff... Yemen. aorhgoahrgouerhgoerewuhuowetergerh
